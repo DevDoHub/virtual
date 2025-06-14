@@ -2,26 +2,20 @@ import numpy as np
 import torch
 
 class Cube:
-    """3D立方体对象，包含完整的物理状态
-    
-    坐标系统：
-    - X-Y平面：水平地面
-    - Z轴：垂直方向（高度）
-    - 重力：沿Z轴负方向
-    """
+    """3D立方体对象，包含完整的物理状态"""
     
     def __init__(self, position, velocity, size=1.0, mass=1.0, color=None):
         """
         初始化立方体
         
         Args:
-            position: [x, y, z] 位置，z为高度
-            velocity: [vx, vy, vz] 速度，vz为垂直速度
+            position: [x, y, z] 位置
+            velocity: [vx, vy, vz] 速度  
             size: 立方体边长
             mass: 质量
             color: RGB颜色元组
         """
-        # 位置和速度 - Z轴为垂直方向
+        # 位置和速度
         self.position = np.array(position, dtype=np.float64)
         self.velocity = np.array(velocity, dtype=np.float64)
         

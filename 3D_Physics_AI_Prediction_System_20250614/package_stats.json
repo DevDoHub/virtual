@@ -1,0 +1,16 @@
+{
+  "package_created": "2025-06-14T23:47:01.510037",
+  "total_files": 29,
+  "package_size_mb": 22.372358322143555,
+  "directories": 10,
+  "file_types": {
+    ".py": 14,
+    ".json": 1,
+    ".md": 3,
+    ".txt": 1,
+    ".mp4": 10,
+    ".pth": 1,
+    ".png": 1,
+    ".sh": 1
+  }
+}

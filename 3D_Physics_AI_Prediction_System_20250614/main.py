@@ -14,29 +14,29 @@ from src.ai import AIPredictor
 from src.utils import Logger, ensure_dir
 
 def create_demo_scenario(scenario='basic'):
-    """创建演示场景 - 使用正确的X-Y地面平面，Z轴垂直系统"""
+    """创建演示场景"""
     scenarios = {
         'basic': {
-            'position': [0, 0, 15],  # Z轴为高度
-            'velocity': [1, 0.5, 0],  # X-Y平面水平速度，Z轴垂直速度
+            'position': [0, 15, 0],
+            'velocity': [1, 0, 0.5],
             'gravity': 9.81,
             'duration': 8.0
         },
         'high_energy': {
-            'position': [-3, 2, 18],  # Z轴为高度
-            'velocity': [4, -1, -2],  # X-Y平面水平，Z轴垂直
+            'position': [-3, 18, 2],
+            'velocity': [4, -1, -2],
             'gravity': 9.81,
             'duration': 10.0
         },
         'low_gravity': {
-            'position': [0, 0, 12],  # Z轴为高度
-            'velocity': [2, 1, 1],   # X-Y平面水平，Z轴垂直
+            'position': [0, 12, 0],
+            'velocity': [2, 1, 1],
             'gravity': 3.71,  # 火星重力
             'duration': 15.0
         },
         'bouncy': {
-            'position': [0, 0, 10],  # Z轴为高度
-            'velocity': [0, 0, 0],   # 初始静止
+            'position': [0, 10, 0],
+            'velocity': [0, 0, 0],
             'gravity': 9.81,
             'duration': 12.0,
             'restitution': 0.9

@@ -19,7 +19,7 @@ class PhysicsEngine:
         
         # 默认场景边界
         if bounds is None:
-            self.bounds = [(-10, 10), (-10, 10), (0, 20)]  # x, y, z (Z轴为高度)
+            self.bounds = [(-10, 10), (0, 20), (-10, 10)]  # x, y, z
         else:
             self.bounds = bounds
             
@@ -46,8 +46,8 @@ class PhysicsEngine:
         """计算作用在立方体上的所有力"""
         forces = np.zeros(3)
         
-        # 重力 - 沿Z轴负方向（向下）
-        gravity_force = np.array([0, 0, -self.gravity * cube.mass])
+        # 重力
+        gravity_force = np.array([0, -self.gravity * cube.mass, 0])
         forces += gravity_force
         
         # 空气阻力（与速度相反）
@@ -155,40 +155,30 @@ class PhysicsEngine:
             cube.angular_velocity[1] += cube.velocity[0] * 0.1
             position_changed = True
         
-        # Y轴边界（水平方向）
+        # Y轴边界（地面）
         if min_corner[1] < self.bounds[1][0]:
             cube.position[1] += self.bounds[1][0] - min_corner[1]
             cube.velocity[1] = -cube.velocity[1] * cube.restitution
-            cube.angular_velocity[2] += cube.velocity[1] * 0.1  # 添加旋转
+            
+            # 地面摩擦力影响水平速度和旋转
+            friction_force = cube.friction * abs(cube.velocity[1])
+            if np.linalg.norm(cube.velocity[[0,2]]) > 0:
+                friction_dir = -cube.velocity[[0,2]] / np.linalg.norm(cube.velocity[[0,2]])
+                cube.velocity[[0,2]] += friction_force * friction_dir
+                
+            # 碰撞产生的旋转
+            cube.angular_velocity[0] += cube.velocity[2] * 0.2
+            cube.angular_velocity[2] += -cube.velocity[0] * 0.2
+            
             position_changed = True
             
         elif max_corner[1] > self.bounds[1][1]:
             cube.position[1] += self.bounds[1][1] - max_corner[1]
             cube.velocity[1] = -cube.velocity[1] * cube.restitution
-            cube.angular_velocity[2] += cube.velocity[1] * 0.1
             position_changed = True
-
-        # Z轴边界（地面和天花板）
-        if min_corner[2] < self.bounds[2][0]:  # 地面碰撞
-            cube.position[2] += self.bounds[2][0] - min_corner[2]
-            cube.velocity[2] = -cube.velocity[2] * cube.restitution
-            
-            # 地面摩擦力影响水平速度和旋转
-            friction_force = cube.friction * abs(cube.velocity[2])
-            if np.linalg.norm(cube.velocity[[0,1]]) > 0:
-                friction_dir = -cube.velocity[[0,1]] / np.linalg.norm(cube.velocity[[0,1]])
-                cube.velocity[[0,1]] += friction_force * friction_dir
-                
-            # 碰撞产生的旋转
-            cube.angular_velocity[0] += cube.velocity[1] * 0.2
-            cube.angular_velocity[1] += -cube.velocity[0] * 0.2
-            
-            position_changed = True
-            
-        elif max_corner[2] > self.bounds[2][1]:  # 天花板碰撞
-            cube.position[2] += self.bounds[2][1] - max_corner[2]
-            cube.velocity[2] = -cube.velocity[2] * cube.restitution
-            position_changed = True
+        
+        # Z轴边界
+        if min_corner[2] < self.bounds[2][0]:
             cube.position[2] += self.bounds[2][0] - min_corner[2]
             cube.velocity[2] = -cube.velocity[2] * cube.restitution
             cube.angular_velocity[0] += cube.velocity[2] * 0.1

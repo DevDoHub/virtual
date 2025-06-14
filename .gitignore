@@ -1,4 +1,16 @@
 *.pth
 
+*.png
+*.mp4
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+
+/__pycache__/*
+*.pyc
+*.pyo
+*.pyd
 
 

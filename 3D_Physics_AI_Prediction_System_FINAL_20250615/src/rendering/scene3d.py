@@ -18,14 +18,13 @@ class Scene3D:
         Args:
             figsize: 图像尺寸
             bounds: 场景边界 [(xmin,xmax), (ymin,ymax), (zmin,zmax)]
-                   X-Y平面为地面，Z轴为垂直高度
         """
         self.fig = plt.figure(figsize=figsize, facecolor='black')
         self.ax = self.fig.add_subplot(111, projection='3d', facecolor='black')
         
-        # 场景边界 - X-Y为地面，Z为高度
+        # 场景边界
         if bounds is None:
-            self.bounds = [(-10, 10), (-10, 10), (0, 20)]  # X, Y, Z
+            self.bounds = [(-10, 10), (0, 20), (-10, 10)]
         else:
             self.bounds = bounds
             
@@ -48,10 +47,10 @@ class Scene3D:
         self.ax.set_ylim(self.bounds[1])
         self.ax.set_zlim(self.bounds[2])
         
-        # 坐标轴标签 - X-Y地面，Z垂直
-        self.ax.set_xlabel('X (East-West)', color='white', fontsize=12)
-        self.ax.set_ylabel('Y (North-South)', color='white', fontsize=12)
-        self.ax.set_zlabel('Z (Height)', color='yellow', fontsize=12)
+        # 坐标轴标签
+        self.ax.set_xlabel('X', color='white', fontsize=12)
+        self.ax.set_ylabel('Y', color='white', fontsize=12)
+        self.ax.set_zlabel('Z', color='white', fontsize=12)
         
         # 设置背景色
         self.ax.xaxis.pane.fill = False
@@ -65,35 +64,26 @@ class Scene3D:
         self.draw_ground()
         
         # 设置标题
-        self.ax.set_title('3D立方体下落模拟 (X-Y地面，Z轴垂直)', color='white', fontsize=16, pad=20)
+        self.ax.set_title('3D立方体下落模拟', color='white', fontsize=16, pad=20)
         
         # 设置刻度颜色
         self.ax.tick_params(colors='white')
         
     def draw_ground(self):
-        """绘制X-Y地面网格（Z=0平面）"""
+        """绘制地面网格"""
         x_range = np.linspace(self.bounds[0][0], self.bounds[0][1], 11)
-        y_range = np.linspace(self.bounds[1][0], self.bounds[1][1], 11)
+        z_range = np.linspace(self.bounds[2][0], self.bounds[2][1], 11)
         
-        # 绘制X-Y地面网格线（Z=0）
-        ground_z = self.bounds[2][0]  # 地面高度（通常为0）
-        
-        # X方向网格线
+        # 绘制网格线
         for x in x_range:
-            self.ax.plot([x, x], [self.bounds[1][0], self.bounds[1][1]], 
-                        [ground_z, ground_z], 
-                        'w-', alpha=0.3, linewidth=0.8)
+            self.ax.plot([x, x], [self.bounds[1][0], self.bounds[1][0]], 
+                        [self.bounds[2][0], self.bounds[2][1]], 
+                        'w-', alpha=0.2, linewidth=0.5)
         
-        # Y方向网格线
-        for y in y_range:
+        for z in z_range:
             self.ax.plot([self.bounds[0][0], self.bounds[0][1]], 
-                        [y, y], 
-                        [ground_z, ground_z], 'w-', alpha=0.3, linewidth=0.8)
-                        
-        # 绘制地面平面
-        X, Y = np.meshgrid(x_range, y_range)
-        Z = np.ones_like(X) * ground_z
-        self.ax.plot_surface(X, Y, Z, alpha=0.1, color='green')
+                        [self.bounds[1][0], self.bounds[1][0]], 
+                        [z, z], 'w-', alpha=0.2, linewidth=0.5)
     
     def render_cube(self, cube: Cube, show_trajectory=True, trajectory_length=50):
         """渲染单个立方体"""

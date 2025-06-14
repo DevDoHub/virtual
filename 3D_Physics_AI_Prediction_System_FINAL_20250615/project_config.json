@@ -1,0 +1,33 @@
+{
+  "project_name": "3D Physics AI Prediction System",
+  "version": "1.0.0-final",
+  "created_date": "2025-06-15T00:54:55.250375",
+  "description": "Graduate AI Course Project - 3D Physics Simulation with LSTM Prediction",
+  "features": [
+    "3D Physics Engine with RK4 Integration",
+    "LSTM Neural Network for Motion Prediction",
+    "High-Quality 3D Rendering and Visualization",
+    "Multiple Viewing Angle Optimizations",
+    "Video Generation and Export",
+    "Server Environment Compatibility",
+    "X-Z Ground Plane View Implementation",
+    "Y-Axis Vertical Orientation Support",
+    "Advanced Collision Detection",
+    "Energy Conservation Monitoring"
+  ],
+  "viewing_optimizations": [
+    "Y-axis vertical view (intuitive_physics_demo.mp4)",
+    "Quick Y-up demonstration (quick_intuitive_y_up_demo.mp4)",
+    "X-Z ground plane view (rotated_ground_plane_demo.mp4)"
+  ],
+  "video_count": 23,
+  "total_size_mb": 43.4,
+  "python_version": "3.11+",
+  "dependencies": [
+    "numpy",
+    "matplotlib",
+    "torch",
+    "opencv-python",
+    "scipy"
+  ]
+}
