@@ -289,3 +289,157 @@ class VideoGenerator:
         
         print(f"✅ 帧序列已保存到: {frame_dir}")
         return frame_dir
+    
+    def render_high_quality_animation(self, filename="high_quality_simulation.mp4", 
+                                     show_prediction=False, figsize=(12, 9)):
+        """
+        生成高质量视频动画，参考clean_demo.py的渲染方式
+        
+        Args:
+            filename: 输出文件名
+            show_prediction: 是否显示AI预测
+            figsize: 图像尺寸
+        """
+        if not self.frame_data:
+            print("❌ 没有帧数据，请先运行 simulate_and_record")
+            return None
+            
+        output_path = os.path.join(self.output_dir, filename)
+        print(f"🎬 生成高质量视频: {filename}")
+        
+        # 创建视频帧
+        frames = []
+        total_frames = len(self.frame_data)
+        
+        for i, frame_info in enumerate(self.frame_data):
+            # 创建新的图形，使用高质量设置
+            fig = plt.figure(figsize=figsize, facecolor='black', dpi=100)
+            ax = fig.add_subplot(111, projection='3d', facecolor='black')
+            
+            # 设置固定的优化视角
+            ax.view_init(elev=25, azim=45)
+            
+            # 设置场景边界
+            ax.set_xlim(self.scene.bounds[0])
+            ax.set_ylim(self.scene.bounds[1])
+            ax.set_zlim(self.scene.bounds[2])
+            
+            # 高质量标签设置
+            ax.set_xlabel('X (East-West)', color='white', fontsize=11)
+            ax.set_ylabel('Y (North-South)', color='white', fontsize=11)
+            ax.set_zlabel('Z (HEIGHT)', color='yellow', fontsize=12, weight='bold')
+            
+            # 绘制高质量地面网格
+            x_grid = np.linspace(self.scene.bounds[0][0], self.scene.bounds[0][1], 11)
+            y_grid = np.linspace(self.scene.bounds[1][0], self.scene.bounds[1][1], 11)
+            X, Y = np.meshgrid(x_grid, y_grid)
+            Z = np.zeros_like(X)
+            ax.plot_wireframe(X, Y, Z, color='gray', alpha=0.3, linewidth=0.5)
+            
+            # 渲染立方体
+            for cube_state in frame_info['cubes']:
+                # 重建立方体对象
+                cube = Cube([0, 0, 0], [0, 0, 0])
+                cube.set_state_vector(cube_state)
+                corners = cube.get_corners()
+                
+                # 立方体的6个面
+                faces = [
+                    [corners[0], corners[1], corners[2], corners[3]],  # 底面
+                    [corners[4], corners[5], corners[6], corners[7]],  # 顶面
+                    [corners[0], corners[1], corners[5], corners[4]],  # 前面
+                    [corners[2], corners[3], corners[7], corners[6]],  # 后面
+                    [corners[1], corners[2], corners[6], corners[5]],  # 右面
+                    [corners[0], corners[3], corners[7], corners[4]]   # 左面
+                ]
+                
+                colors = ['red', 'blue', 'green', 'yellow', 'cyan', 'magenta']
+                
+                from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+                for j, face in enumerate(faces):
+                    poly = [[list(vertex) for vertex in face]]
+                    collection = Poly3DCollection(poly, alpha=0.7, 
+                                                facecolors=colors[j], 
+                                                edgecolors='white',
+                                                linewidths=0.5)
+                    ax.add_collection3d(collection)
+            
+            # 获取第一个立方体的状态用于显示信息
+            first_cube = Cube([0, 0, 0], [0, 0, 0])
+            first_cube.set_state_vector(frame_info['cubes'][0])
+            
+            # 显示信息
+            time_text = f"Time: {frame_info['time']:.1f}s"
+            pos_text = f"Pos: ({first_cube.position[0]:.1f}, {first_cube.position[1]:.1f}, {first_cube.position[2]:.1f})"
+            vel_text = f"Vel: ({first_cube.velocity[0]:.1f}, {first_cube.velocity[1]:.1f}, {first_cube.velocity[2]:.1f})"
+            
+            ax.text2D(0.02, 0.98, time_text, transform=ax.transAxes, 
+                     color='white', fontsize=12, verticalalignment='top')
+            ax.text2D(0.02, 0.93, pos_text, transform=ax.transAxes,
+                     color='white', fontsize=10, verticalalignment='top')
+            ax.text2D(0.02, 0.88, vel_text, transform=ax.transAxes,
+                     color='white', fontsize=10, verticalalignment='top')
+            
+            # 绘制AI预测轨迹
+            if show_prediction and frame_info.get('prediction') is not None:
+                ax.text2D(0.02, 0.83, "AI Prediction: ON", transform=ax.transAxes,
+                         color='green', fontsize=10, verticalalignment='top', weight='bold')
+                
+                # 绘制预测轨迹
+                prediction = frame_info['prediction']
+                if len(prediction) > 1:
+                    # 预测位置轨迹 (绿色虚线)
+                    pred_positions = prediction[:, :3]  # 只取位置坐标
+                    ax.plot(pred_positions[:, 0], pred_positions[:, 1], pred_positions[:, 2],
+                           'g--', alpha=0.8, linewidth=3, label='AI Prediction')
+                    
+                    # 在预测终点放置一个半透明立方体
+                    if len(pred_positions) >= 3:
+                        final_pred_pos = pred_positions[-1]
+                        # 绘制预测终点标记
+                        ax.scatter([final_pred_pos[0]], [final_pred_pos[1]], [final_pred_pos[2]], 
+                                 c='lime', s=100, alpha=0.7, marker='o')
+                        
+                        # 显示预测信息
+                        pred_text = f"Pred: ({final_pred_pos[0]:.1f}, {final_pred_pos[1]:.1f}, {final_pred_pos[2]:.1f})"
+                        ax.text2D(0.02, 0.78, pred_text, transform=ax.transAxes,
+                                 color='lime', fontsize=10, verticalalignment='top')
+            else:
+                # 如果没有预测，显示AI状态
+                if show_prediction:
+                    ax.text2D(0.02, 0.83, "AI Prediction: LOADING...", transform=ax.transAxes,
+                             color='yellow', fontsize=10, verticalalignment='top')
+            
+            # 样式设置
+            ax.tick_params(colors='white', labelsize=9)
+            ax.xaxis.pane.fill = False
+            ax.yaxis.pane.fill = False
+            ax.zaxis.pane.fill = False
+            
+            # 转换为视频帧
+            fig.canvas.draw()
+            buf = fig.canvas.buffer_rgba()
+            img = np.asarray(buf)[:,:,:3]  # 只取RGB通道
+            frames.append(img)
+            
+            plt.close(fig)
+            
+            if i % 30 == 0:
+                print(f"  渲染进度: {i}/{total_frames} ({i/total_frames*100:.1f}%)")
+        
+        # 保存高质量视频
+        if frames:
+            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            out = cv2.VideoWriter(output_path, fourcc, self.fps, 
+                                (frames[0].shape[1], frames[0].shape[0]))
+            
+            for frame in frames:
+                frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+                out.write(frame_bgr)
+            
+            out.release()
+            print(f"✅ 高质量视频已保存: {output_path}")
+            return output_path
+        else:
+            print("❌ 视频帧生成失败")
+            return None

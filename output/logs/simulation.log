@@ -63,3 +63,98 @@
 [2025-06-15 02:14:56] INFO: 开始物理模拟...
 [2025-06-15 02:14:58] INFO: 生成视频: simulation_high_energy_8.0s.mp4
 [2025-06-15 02:18:30] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(-167.56487288017402), 'energy_final': np.float64(-86.65397143476379), 'energy_loss': np.float64(-80.91090144541023), 'energy_loss_percent': np.float64(48.286314461187686)}
+[2025-06-15 03:06:43] INFO: 开始运行，模式: demo, 场景: high_energy
+[2025-06-15 03:06:43] INFO: 开始演示模式
+[2025-06-15 03:06:43] INFO: 开始物理模拟模式
+[2025-06-15 03:06:43] INFO: 开始物理模拟...
+[2025-06-15 03:06:43] INFO: 生成高质量视频: simulation_high_energy_3.0s.mp4
+[2025-06-15 03:06:54] INFO: 模拟统计: {'total_frames': 90, 'duration': 3.0, 'fps': 30, 'energy_initial': np.float64(187.06449310549198), 'energy_final': np.float64(169.951340480774), 'energy_loss': np.float64(17.11315262471797), 'energy_loss_percent': np.float64(9.148263436111996)}
+[2025-06-15 03:14:34] INFO: 开始运行，模式: demo, 场景: high_energy
+[2025-06-15 03:14:34] INFO: 开始演示模式
+[2025-06-15 03:14:34] INFO: 开始物理模拟模式
+[2025-06-15 03:14:34] INFO: 开始物理模拟...
+[2025-06-15 03:14:34] INFO: 生成高质量视频: simulation_high_energy_3.0s.mp4
+[2025-06-15 03:14:46] INFO: 模拟统计: {'total_frames': 90, 'duration': 3.0, 'fps': 30, 'energy_initial': np.float64(187.06449310549198), 'energy_final': np.float64(169.951340480774), 'energy_loss': np.float64(17.11315262471797), 'energy_loss_percent': np.float64(9.148263436111996)}
+[2025-06-15 03:35:36] INFO: 开始运行，模式: demo, 场景: high_energy
+[2025-06-15 03:35:36] INFO: 开始演示模式
+[2025-06-15 03:35:36] INFO: 开始物理模拟模式
+[2025-06-15 03:35:38] WARNING: 加载模型失败 output/models/improved_physics_predictor.pth: Error(s) in loading state_dict for PhysicsLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 13]) from checkpoint, the shape in current model is torch.Size([512, 13]).
+	size mismatch for lstm.weight_hh_l0: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.bias_ih_l0: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.bias_hh_l0: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.weight_ih_l1: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.weight_hh_l1: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.bias_ih_l1: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.bias_hh_l1: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for fc_layers.0.weight: copying a param with shape torch.Size([64, 64]) from checkpoint, the shape in current model is torch.Size([128, 128]).
+	size mismatch for fc_layers.0.bias: copying a param with shape torch.Size([64]) from checkpoint, the shape in current model is torch.Size([128]).
+	size mismatch for fc_layers.3.weight: copying a param with shape torch.Size([32, 64]) from checkpoint, the shape in current model is torch.Size([64, 128]).
+	size mismatch for fc_layers.3.bias: copying a param with shape torch.Size([32]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for fc_layers.6.weight: copying a param with shape torch.Size([13, 32]) from checkpoint, the shape in current model is torch.Size([13, 64]).
+[2025-06-15 03:35:38] INFO: AI预测器已加载: output/models/quick_physics_predictor.pth
+[2025-06-15 03:35:38] INFO: 开始物理模拟...
+[2025-06-15 03:35:39] INFO: 生成高质量视频: simulation_high_energy_5.0s.mp4
+[2025-06-15 03:35:59] INFO: 模拟统计: {'total_frames': 150, 'duration': 5.0, 'fps': 30, 'energy_initial': np.float64(187.06449310549198), 'energy_final': np.float64(70.89310161120979), 'energy_loss': np.float64(116.17139149428219), 'energy_loss_percent': np.float64(62.10232073746311)}
+[2025-06-15 03:37:50] INFO: 开始运行，模式: demo, 场景: high_energy
+[2025-06-15 03:37:50] INFO: 开始演示模式
+[2025-06-15 03:37:50] INFO: 开始物理模拟模式
+[2025-06-15 03:37:52] WARNING: 加载模型失败 output/models/improved_physics_predictor.pth: Error(s) in loading state_dict for PhysicsLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 13]) from checkpoint, the shape in current model is torch.Size([512, 13]).
+	size mismatch for lstm.weight_hh_l0: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.bias_ih_l0: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.bias_hh_l0: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.weight_ih_l1: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.weight_hh_l1: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.bias_ih_l1: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.bias_hh_l1: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for fc_layers.0.weight: copying a param with shape torch.Size([64, 64]) from checkpoint, the shape in current model is torch.Size([128, 128]).
+	size mismatch for fc_layers.0.bias: copying a param with shape torch.Size([64]) from checkpoint, the shape in current model is torch.Size([128]).
+	size mismatch for fc_layers.3.weight: copying a param with shape torch.Size([32, 64]) from checkpoint, the shape in current model is torch.Size([64, 128]).
+	size mismatch for fc_layers.3.bias: copying a param with shape torch.Size([32]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for fc_layers.6.weight: copying a param with shape torch.Size([13, 32]) from checkpoint, the shape in current model is torch.Size([13, 64]).
+[2025-06-15 03:37:52] INFO: AI预测器已加载: output/models/quick_physics_predictor.pth
+[2025-06-15 03:37:52] INFO: 开始物理模拟...
+[2025-06-15 03:37:52] INFO: 生成高质量视频: simulation_high_energy_3.0s.mp4
+[2025-06-15 03:38:05] INFO: 模拟统计: {'total_frames': 90, 'duration': 3.0, 'fps': 30, 'energy_initial': np.float64(187.06449310549198), 'energy_final': np.float64(169.951340480774), 'energy_loss': np.float64(17.11315262471797), 'energy_loss_percent': np.float64(9.148263436111996)}
+[2025-06-15 03:40:17] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 03:40:17] INFO: 开始演示模式
+[2025-06-15 03:40:17] INFO: 开始物理模拟模式
+[2025-06-15 03:40:18] WARNING: 加载模型失败 output/models/improved_physics_predictor.pth: Error(s) in loading state_dict for PhysicsLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 13]) from checkpoint, the shape in current model is torch.Size([512, 13]).
+	size mismatch for lstm.weight_hh_l0: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.bias_ih_l0: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.bias_hh_l0: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.weight_ih_l1: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.weight_hh_l1: copying a param with shape torch.Size([256, 64]) from checkpoint, the shape in current model is torch.Size([512, 128]).
+	size mismatch for lstm.bias_ih_l1: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for lstm.bias_hh_l1: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([512]).
+	size mismatch for fc_layers.0.weight: copying a param with shape torch.Size([64, 64]) from checkpoint, the shape in current model is torch.Size([128, 128]).
+	size mismatch for fc_layers.0.bias: copying a param with shape torch.Size([64]) from checkpoint, the shape in current model is torch.Size([128]).
+	size mismatch for fc_layers.3.weight: copying a param with shape torch.Size([32, 64]) from checkpoint, the shape in current model is torch.Size([64, 128]).
+	size mismatch for fc_layers.3.bias: copying a param with shape torch.Size([32]) from checkpoint, the shape in current model is torch.Size([64]).
+	size mismatch for fc_layers.6.weight: copying a param with shape torch.Size([13, 32]) from checkpoint, the shape in current model is torch.Size([13, 64]).
+[2025-06-15 03:40:18] INFO: AI预测器已加载: output/models/quick_physics_predictor.pth
+[2025-06-15 03:40:18] INFO: 开始物理模拟...
+[2025-06-15 03:40:20] INFO: 生成高质量视频: simulation_bouncy_8.0s.mp4
+[2025-06-15 03:40:53] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(52.080057217123766), 'energy_loss': np.float64(46.01994278287624), 'energy_loss_percent': np.float64(46.911256659404934)}
+[2025-06-15 03:43:03] INFO: 开始运行，模式: train, 场景: basic
+[2025-06-15 03:43:03] INFO: 开始AI训练模式
+[2025-06-15 03:43:04] INFO: 收集训练数据...
+[2025-06-15 03:43:12] INFO: 开始训练模型...
+[2025-06-15 03:52:18] INFO: 模型已保存到: output/models/physics_predictor.pth
+[2025-06-15 03:52:18] INFO: 模型评估结果: {'mse_loss': 0.011692602187395096, 'position_error': np.float64(0.19849462803871992), 'velocity_error': np.float64(0.16082680041606265)}
+[2025-06-15 03:52:35] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 03:52:35] INFO: 开始演示模式
+[2025-06-15 03:52:35] INFO: 开始物理模拟模式
+[2025-06-15 03:52:37] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 03:52:37] INFO: 开始物理模拟...
+[2025-06-15 03:52:38] INFO: 生成高质量视频: simulation_bouncy_8.0s.mp4
+[2025-06-15 03:53:12] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(52.080057217123766), 'energy_loss': np.float64(46.01994278287624), 'energy_loss_percent': np.float64(46.911256659404934)}
+[2025-06-15 03:55:43] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 03:55:43] INFO: 开始演示模式
+[2025-06-15 03:55:43] INFO: 开始物理模拟模式
+[2025-06-15 03:55:44] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 03:55:44] INFO: 开始物理模拟...
+[2025-06-15 03:55:46] INFO: 生成高质量视频: simulation_bouncy_8.0s.mp4
+[2025-06-15 03:56:23] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(52.080057217123766), 'energy_loss': np.float64(46.01994278287624), 'energy_loss_percent': np.float64(46.911256659404934)}

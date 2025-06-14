@@ -79,9 +79,9 @@ def run_training(args, logger):
     """运行AI训练模式"""
     logger.info("开始AI训练模式")
     
-    # 创建物理环境
+    # 创建物理环境 - 使用正确的坐标系统
     engine = PhysicsEngine(gravity=9.81)
-    cube = Cube([0, 15, 0], [0, 0, 0], size=1.0)
+    cube = Cube([0, 0, 15], [0, 0, 0], size=1.0)  # Z轴为高度
     
     # 创建AI预测器
     predictor = AIPredictor(sequence_length=10)
@@ -112,8 +112,8 @@ def run_simulation(args, logger):
     # 获取场景参数
     scenario_config = create_demo_scenario(args.scenario)
     
-    # 创建物理环境
-    bounds = [(-10, 10), (0, 20), (-10, 10)]
+    # 创建物理环境 - 使用正确的X-Y地面，Z轴垂直坐标系
+    bounds = [(-10, 10), (-10, 10), (0, 20)]  # X, Y, Z (Z轴为高度)
     engine = PhysicsEngine(gravity=scenario_config['gravity'], bounds=bounds)
     
     # 创建立方体
@@ -135,8 +135,10 @@ def run_simulation(args, logger):
     if args.ai_predict:
         predictor = AIPredictor()
         model_paths = [
+            os.path.join(args.output_dir, 'models', 'compatible_physics_predictor.pth'),  # 新的兼容模型
             os.path.join(args.output_dir, 'models', 'physics_predictor.pth'),
             os.path.join(args.output_dir, 'models', 'quick_physics_predictor.pth'),
+            'output/models/compatible_physics_predictor.pth',  # 默认路径
             'output/models/quick_physics_predictor.pth'
         ]
         
@@ -153,6 +155,7 @@ def run_simulation(args, logger):
         
         if not model_loaded:
             logger.warning("未找到可用的预训练模型，将禁用AI预测")
+            logger.info("💡 建议先运行: python train_improved_ai.py")
             predictor = None
     
     # 运行模拟
@@ -166,11 +169,12 @@ def run_simulation(args, logger):
     # 生成视频
     if args.save_video:
         video_filename = f"simulation_{args.scenario}_{args.duration}s.mp4"
-        logger.info(f"生成视频: {video_filename}")
-        video_gen.render_animation(
+        logger.info(f"生成高质量视频: {video_filename}")
+        # 使用高质量渲染方法，参考clean_demo.py的效果
+        video_gen.render_high_quality_animation(
             filename=video_filename,
             show_prediction=predictor is not None,
-            camera_rotation=True
+            figsize=(12, 9)
         )
     
     # 显示统计信息
