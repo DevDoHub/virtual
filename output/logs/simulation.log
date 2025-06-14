@@ -40,3 +40,26 @@
 [2025-06-14 22:25:53] INFO: AI预测器已加载: output/models/quick_physics_predictor.pth
 [2025-06-14 22:25:53] INFO: 开始物理模拟...
 [2025-06-14 22:25:55] INFO: 模拟统计: {'total_frames': 180, 'duration': 6.0, 'fps': 30, 'energy_initial': np.float64(147.77477641320226), 'energy_final': np.float64(64.4167129319556), 'energy_loss': np.float64(83.35806348124666), 'energy_loss_percent': np.float64(56.40885779327047)}
+[2025-06-15 02:10:07] INFO: 开始运行，模式: demo, 场景: basic
+[2025-06-15 02:10:07] INFO: 开始演示模式
+[2025-06-15 02:10:07] INFO: 开始物理模拟模式
+[2025-06-15 02:10:07] INFO: 开始物理模拟...
+[2025-06-15 02:10:07] INFO: 模拟统计: {'total_frames': 60, 'duration': 2.0, 'fps': 30, 'energy_initial': np.float64(-146.59579239709979), 'energy_final': np.float64(-86.9027768041518), 'energy_loss': np.float64(-59.69301559294799), 'energy_loss_percent': np.float64(40.719460372539956)}
+[2025-06-15 02:12:38] INFO: 开始运行，模式: demo, 场景: high_energy
+[2025-06-15 02:12:38] INFO: 开始演示模式
+[2025-06-15 02:12:38] INFO: 开始物理模拟模式
+[2025-06-15 02:12:39] INFO: AI预测器已加载: output/models/quick_physics_predictor.pth
+[2025-06-15 02:12:39] INFO: 开始物理模拟...
+[2025-06-15 02:12:41] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(-167.56487288017402), 'energy_final': np.float64(-86.65397143476379), 'energy_loss': np.float64(-80.91090144541023), 'energy_loss_percent': np.float64(48.286314461187686)}
+[2025-06-15 02:13:43] INFO: 开始运行，模式: demo, 场景: basic
+[2025-06-15 02:13:43] INFO: 开始演示模式
+[2025-06-15 02:13:43] INFO: 开始物理模拟模式
+[2025-06-15 02:13:43] INFO: 开始物理模拟...
+[2025-06-15 02:13:43] INFO: 生成视频: simulation_basic_8.0s.mp4
+[2025-06-15 02:14:55] INFO: 开始运行，模式: demo, 场景: high_energy
+[2025-06-15 02:14:55] INFO: 开始演示模式
+[2025-06-15 02:14:55] INFO: 开始物理模拟模式
+[2025-06-15 02:14:56] INFO: AI预测器已加载: output/models/quick_physics_predictor.pth
+[2025-06-15 02:14:56] INFO: 开始物理模拟...
+[2025-06-15 02:14:58] INFO: 生成视频: simulation_high_energy_8.0s.mp4
+[2025-06-15 02:18:30] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(-167.56487288017402), 'energy_final': np.float64(-86.65397143476379), 'energy_loss': np.float64(-80.91090144541023), 'energy_loss_percent': np.float64(48.286314461187686)}

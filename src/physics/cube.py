@@ -122,7 +122,7 @@ class Cube:
     
     def get_potential_energy(self, gravity=9.81):
         """计算重力势能"""
-        return self.mass * gravity * self.position[1]  # y轴为高度
+        return self.mass * gravity * self.position[2]  # Z轴为高度
     
     def __repr__(self):
         return f"Cube(pos={self.position}, vel={self.velocity}, size={self.size})"

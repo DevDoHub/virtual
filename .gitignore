@@ -8,7 +8,9 @@
 *.webp
 *.svg
 
-/__pycache__/*
+*/__pycache__/*
+./src/physics/__pycache__/*
+
 *.pyc
 *.pyo
 *.pyd
