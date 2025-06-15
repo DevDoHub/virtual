@@ -11,6 +11,10 @@
 */__pycache__/*
 ./src/physics/__pycache__/*
 
+__pycache__/
+*.py[cod]
+*$py.class
+
 *.pyc
 *.pyo
 *.pyd

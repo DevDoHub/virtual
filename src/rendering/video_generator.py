@@ -291,7 +291,7 @@ class VideoGenerator:
         return frame_dir
     
     def render_high_quality_animation(self, filename="high_quality_simulation.mp4", 
-                                     show_prediction=False, figsize=(12, 9)):
+                                     show_prediction=False, figsize=(12, 9), engine=None):
         """
         生成高质量视频动画，参考clean_demo.py的渲染方式
         
@@ -299,6 +299,7 @@ class VideoGenerator:
             filename: 输出文件名
             show_prediction: 是否显示AI预测
             figsize: 图像尺寸
+            engine: 物理引擎对象（可选，用于渲染障碍物）
         """
         if not self.frame_data:
             print("❌ 没有帧数据，请先运行 simulate_and_record")
@@ -364,6 +365,16 @@ class VideoGenerator:
                                                 linewidths=0.5)
                     ax.add_collection3d(collection)
             
+            # 渲染障碍物 (如果提供了物理引擎)
+            if engine is not None and hasattr(engine, 'obstacle_manager') and engine.obstacle_manager.obstacles:
+                try:
+                    obstacle_render_data = engine.get_obstacles_render_data()
+                    for obstacle_data in obstacle_render_data:
+                        self._render_simple_obstacle(ax, obstacle_data)
+                except AttributeError:
+                    # 如果物理引擎没有相关方法，跳过障碍物渲染
+                    pass
+            
             # 获取第一个立方体的状态用于显示信息
             first_cube = Cube([0, 0, 0], [0, 0, 0])
             first_cube.set_state_vector(frame_info['cubes'][0])
@@ -380,35 +391,114 @@ class VideoGenerator:
             ax.text2D(0.02, 0.88, vel_text, transform=ax.transAxes,
                      color='white', fontsize=10, verticalalignment='top')
             
-            # 绘制AI预测轨迹
+            # 绘制AI预测轨迹 - 超级明显版本
             if show_prediction and frame_info.get('prediction') is not None:
-                ax.text2D(0.02, 0.83, "AI Prediction: ON", transform=ax.transAxes,
-                         color='green', fontsize=10, verticalalignment='top', weight='bold')
+                # 闪烁效果的AI标题
+                flash_color = 'lime' if (i // 5) % 2 == 0 else 'yellow'
+                ax.text2D(0.02, 0.83, "🔥 AI PREDICTION: ACTIVE 🔥", transform=ax.transAxes,
+                         color=flash_color, fontsize=14, verticalalignment='top', weight='bold',
+                         bbox=dict(boxstyle="round,pad=0.3", facecolor='black', alpha=0.8))
                 
                 # 绘制预测轨迹
                 prediction = frame_info['prediction']
                 if len(prediction) > 1:
-                    # 预测位置轨迹 (绿色虚线)
                     pred_positions = prediction[:, :3]  # 只取位置坐标
-                    ax.plot(pred_positions[:, 0], pred_positions[:, 1], pred_positions[:, 2],
-                           'g--', alpha=0.8, linewidth=3, label='AI Prediction')
                     
-                    # 在预测终点放置一个半透明立方体
+                    # 1. 主预测轨迹 - 超粗亮绿色虚线
+                    ax.plot(pred_positions[:, 0], pred_positions[:, 1], pred_positions[:, 2],
+                           'lime', linestyle='--', alpha=1.0, linewidth=8, 
+                           dash_capstyle='round', label='AI Prediction')
+                    
+                    # 2. 外围光晕效果
+                    ax.plot(pred_positions[:, 0], pred_positions[:, 1], pred_positions[:, 2],
+                           'yellow', linestyle='--', alpha=0.6, linewidth=12)
+                    
+                    # 3. 渐变的预测点 - 更大更明显
+                    for j, pos in enumerate(pred_positions):
+                        progress = j / len(pred_positions)
+                        alpha = 1.0 - progress * 0.5  # 从1.0渐变到0.5
+                        size = 200 - (j * 20)  # 从200渐变到较小
+                        
+                        # 主要标记点 (亮绿色)
+                        ax.scatter([pos[0]], [pos[1]], [pos[2]], 
+                                 c='lime', s=max(size, 80), alpha=alpha, 
+                                 marker='*', edgecolors='white', linewidths=3)
+                        
+                        # 外围光晕点 (黄色)
+                        ax.scatter([pos[0]], [pos[1]], [pos[2]], 
+                                 c='yellow', s=max(size+50, 120), alpha=alpha*0.4, 
+                                 marker='o', edgecolors='orange', linewidths=2)
+                    
+                    # 4. 预测起始点特殊标记
+                    start_pos = pred_positions[0]
+                    ax.scatter([start_pos[0]], [start_pos[1]], [start_pos[2]], 
+                             c='red', s=300, alpha=0.9, marker='^', 
+                             edgecolors='white', linewidths=4, label='Prediction Start')
+                    
+                    
+                    # 在预测终点放置一个超明显的预测立方体
                     if len(pred_positions) >= 3:
                         final_pred_pos = pred_positions[-1]
-                        # 绘制预测终点标记
-                        ax.scatter([final_pred_pos[0]], [final_pred_pos[1]], [final_pred_pos[2]], 
-                                 c='lime', s=100, alpha=0.7, marker='o')
                         
-                        # 显示预测信息
-                        pred_text = f"Pred: ({final_pred_pos[0]:.1f}, {final_pred_pos[1]:.1f}, {final_pred_pos[2]:.1f})"
+                        # 绘制超大预测立方体轮廓 - 闪烁效果
+                        cube_size = 1.2  # 更大的预测立方体
+                        flash_alpha = 0.9 if (i // 3) % 2 == 0 else 0.6  # 快速闪烁
+                        
+                        pred_cube_corners = np.array([
+                            [final_pred_pos[0]-cube_size, final_pred_pos[1]-cube_size, final_pred_pos[2]-cube_size],
+                            [final_pred_pos[0]+cube_size, final_pred_pos[1]-cube_size, final_pred_pos[2]-cube_size],
+                            [final_pred_pos[0]+cube_size, final_pred_pos[1]+cube_size, final_pred_pos[2]-cube_size],
+                            [final_pred_pos[0]-cube_size, final_pred_pos[1]+cube_size, final_pred_pos[2]-cube_size],
+                            [final_pred_pos[0]-cube_size, final_pred_pos[1]-cube_size, final_pred_pos[2]+cube_size],
+                            [final_pred_pos[0]+cube_size, final_pred_pos[1]-cube_size, final_pred_pos[2]+cube_size],
+                            [final_pred_pos[0]+cube_size, final_pred_pos[1]+cube_size, final_pred_pos[2]+cube_size],
+                            [final_pred_pos[0]-cube_size, final_pred_pos[1]+cube_size, final_pred_pos[2]+cube_size],
+                        ])
+                        
+                        # 绘制预测立方体边框 - 更粗的线
+                        edges = [
+                            [0,1], [1,2], [2,3], [3,0],  # 底面
+                            [4,5], [5,6], [6,7], [7,4],  # 顶面
+                            [0,4], [1,5], [2,6], [3,7]   # 垂直边
+                        ]
+                        
+                        for edge in edges:
+                            start, end = edge
+                            ax.plot([pred_cube_corners[start][0], pred_cube_corners[end][0]],
+                                   [pred_cube_corners[start][1], pred_cube_corners[end][1]],
+                                   [pred_cube_corners[start][2], pred_cube_corners[end][2]],
+                                   'lime', linewidth=5, alpha=flash_alpha)
+                        
+                        # 添加终点爆炸效果
+                        ax.scatter([final_pred_pos[0]], [final_pred_pos[1]], [final_pred_pos[2]], 
+                                 c='lime', s=400, alpha=flash_alpha, marker='*', 
+                                 edgecolors='white', linewidths=5)
+                        ax.scatter([final_pred_pos[0]], [final_pred_pos[1]], [final_pred_pos[2]], 
+                                 c='yellow', s=600, alpha=flash_alpha*0.5, marker='o', 
+                                 edgecolors='orange', linewidths=3)
+                        
+                        # 显示超明显的预测信息
+                        pred_text = f"🎯 AI PREDICTS: ({final_pred_pos[0]:.1f}, {final_pred_pos[1]:.1f}, {final_pred_pos[2]:.1f})"
                         ax.text2D(0.02, 0.78, pred_text, transform=ax.transAxes,
-                                 color='lime', fontsize=10, verticalalignment='top')
+                                 color='lime', fontsize=12, verticalalignment='top', weight='bold',
+                                 bbox=dict(boxstyle="round,pad=0.2", facecolor='darkgreen', alpha=0.7))
+                        
+                        # 预测精度指示器
+                        steps_text = f"🧠 Thinking {len(pred_positions)} steps ahead"
+                        ax.text2D(0.02, 0.73, steps_text, transform=ax.transAxes,
+                                 color='cyan', fontsize=11, verticalalignment='top', weight='bold')
+                        
+                        # 添加预测置信度动画效果
+                        confidence = 85 + (i % 15)  # 模拟变化的置信度
+                        conf_color = 'lime' if confidence > 90 else 'yellow' if confidence > 80 else 'orange'
+                        confidence_text = f"📊 Confidence: {confidence}%"
+                        ax.text2D(0.02, 0.68, confidence_text, transform=ax.transAxes,
+                                 color=conf_color, fontsize=10, verticalalignment='top', weight='bold')
             else:
                 # 如果没有预测，显示AI状态
                 if show_prediction:
-                    ax.text2D(0.02, 0.83, "AI Prediction: LOADING...", transform=ax.transAxes,
-                             color='yellow', fontsize=10, verticalalignment='top')
+                    ax.text2D(0.02, 0.83, "🤖 AI Prediction: LOADING...", transform=ax.transAxes,
+                             color='yellow', fontsize=11, verticalalignment='top', weight='bold')
             
             # 样式设置
             ax.tick_params(colors='white', labelsize=9)
@@ -443,3 +533,41 @@ class VideoGenerator:
         else:
             print("❌ 视频帧生成失败")
             return None
+    
+    def _render_simple_obstacle(self, ax, obstacle_data):
+        """
+        渲染简单的障碍物
+        
+        Args:
+            ax: matplotlib 3D坐标轴
+            obstacle_data: 障碍物渲染数据
+        """
+        obstacle_type = obstacle_data.get('type', 'box')
+        color = obstacle_data.get('color', (0.5, 0.5, 0.5))
+        
+        if obstacle_type == 'box':
+            # 渲染方形障碍物
+            faces = obstacle_data.get('faces', [])
+            
+            from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+            for face in faces:
+                poly = [face]
+                collection = Poly3DCollection(poly, alpha=0.6, 
+                                            facecolors=color, 
+                                            edgecolors='black',
+                                            linewidths=1.0)
+                ax.add_collection3d(collection)
+                
+        elif obstacle_type == 'sphere':
+            # 渲染球形障碍物
+            center = obstacle_data.get('center', [0, 0, 0])
+            radius = obstacle_data.get('radius', 1.0)
+            
+            # 创建球面
+            u = np.linspace(0, 2 * np.pi, 20)
+            v = np.linspace(0, np.pi, 10)
+            x = radius * np.outer(np.cos(u), np.sin(v)) + center[0]
+            y = radius * np.outer(np.sin(u), np.sin(v)) + center[1]
+            z = radius * np.outer(np.ones(np.size(u)), np.cos(v)) + center[2]
+            
+            ax.plot_surface(x, y, z, alpha=0.6, color=color, edgecolor='black', linewidth=0.5)

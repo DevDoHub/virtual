@@ -158,3 +158,99 @@
 [2025-06-15 03:55:44] INFO: 开始物理模拟...
 [2025-06-15 03:55:46] INFO: 生成高质量视频: simulation_bouncy_8.0s.mp4
 [2025-06-15 03:56:23] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(52.080057217123766), 'energy_loss': np.float64(46.01994278287624), 'energy_loss_percent': np.float64(46.911256659404934)}
+[2025-06-15 04:06:41] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 04:06:41] INFO: 开始演示模式
+[2025-06-15 04:06:41] INFO: 开始物理模拟模式
+[2025-06-15 04:06:42] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 04:06:42] INFO: 开始物理模拟...
+[2025-06-15 04:06:44] INFO: 生成高质量视频: simulation_bouncy_8.0s.mp4
+[2025-06-15 04:07:50] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(52.080057217123766), 'energy_loss': np.float64(46.01994278287624), 'energy_loss_percent': np.float64(46.911256659404934)}
+[2025-06-15 04:18:08] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 04:18:08] INFO: 开始演示模式
+[2025-06-15 04:18:08] INFO: 开始物理模拟模式
+[2025-06-15 04:18:09] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 04:18:09] INFO: 开始物理模拟...
+[2025-06-15 04:18:11] INFO: 生成高质量视频: simulation_bouncy_8.0s.mp4
+[2025-06-15 13:35:31] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 13:35:31] INFO: 开始演示模式
+[2025-06-15 13:35:31] INFO: 开始物理模拟模式
+[2025-06-15 13:35:32] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 13:35:32] INFO: 开始物理模拟...
+[2025-06-15 13:50:46] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 13:50:46] INFO: 开始演示模式
+[2025-06-15 13:50:46] INFO: 开始物理模拟模式
+[2025-06-15 13:50:46] INFO: 开始物理模拟...
+[2025-06-15 13:54:30] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 13:54:30] INFO: 开始演示模式
+[2025-06-15 13:54:30] INFO: 开始物理模拟模式
+[2025-06-15 13:54:30] INFO: 开始物理模拟...
+[2025-06-15 13:55:42] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 13:55:42] INFO: 开始演示模式
+[2025-06-15 13:55:42] INFO: 开始物理模拟模式
+[2025-06-15 13:55:42] INFO: 开始物理模拟...
+[2025-06-15 13:56:20] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 13:56:20] INFO: 开始演示模式
+[2025-06-15 13:56:20] INFO: 开始物理模拟模式
+[2025-06-15 13:56:20] INFO: 开始物理模拟...
+[2025-06-15 13:56:20] INFO: 生成高质量视频: simulation_bouncy_3.0s.mp4
+[2025-06-15 13:56:36] INFO: 模拟统计: {'total_frames': 90, 'duration': 3.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(57.21453221017027), 'energy_loss': np.float64(40.88546778982974), 'energy_loss_percent': np.float64(41.677337196564466)}
+[2025-06-15 13:56:50] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 13:56:50] INFO: 开始演示模式
+[2025-06-15 13:56:50] INFO: 开始物理模拟模式
+[2025-06-15 13:56:51] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 13:56:51] INFO: 开始物理模拟...
+[2025-06-15 13:56:52] INFO: 生成高质量视频: simulation_bouncy_5.0s.mp4
+[2025-06-15 13:57:41] INFO: 模拟统计: {'total_frames': 150, 'duration': 5.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(56.91384460019758), 'energy_loss': np.float64(41.18615539980243), 'energy_loss_percent': np.float64(41.98384852171501)}
+[2025-06-15 14:06:37] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 14:06:37] INFO: 开始演示模式
+[2025-06-15 14:06:37] INFO: 开始物理模拟模式
+[2025-06-15 14:06:39] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 14:06:39] INFO: 开始物理模拟...
+[2025-06-15 14:06:40] INFO: 生成高质量视频: simulation_bouncy_3.0s.mp4
+[2025-06-15 14:07:08] INFO: 模拟统计: {'total_frames': 90, 'duration': 3.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(57.21453221017027), 'energy_loss': np.float64(40.88546778982974), 'energy_loss_percent': np.float64(41.677337196564466)}
+[2025-06-15 14:08:40] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 14:08:40] INFO: 开始演示模式
+[2025-06-15 14:08:40] INFO: 开始物理模拟模式
+[2025-06-15 14:08:42] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 14:08:42] INFO: 开始物理模拟...
+[2025-06-15 14:08:42] INFO: 生成高质量视频: simulation_bouncy_3.0s.mp4
+[2025-06-15 14:09:10] INFO: 模拟统计: {'total_frames': 90, 'duration': 3.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(57.21453221017027), 'energy_loss': np.float64(40.88546778982974), 'energy_loss_percent': np.float64(41.677337196564466)}
+[2025-06-15 14:12:14] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 14:12:14] INFO: 开始演示模式
+[2025-06-15 14:12:14] INFO: 开始物理模拟模式
+[2025-06-15 14:12:16] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 14:12:16] INFO: 开始物理模拟...
+[2025-06-15 14:12:18] INFO: 生成高质量视频: simulation_bouncy_8.0s.mp4
+[2025-06-15 14:13:39] INFO: 模拟统计: {'total_frames': 240, 'duration': 8.0, 'fps': 30, 'energy_initial': np.float64(98.10000000000001), 'energy_final': np.float64(34.008485773989484), 'energy_loss': np.float64(64.09151422601053), 'energy_loss_percent': np.float64(65.3328381508772)}
+[2025-06-15 15:55:37] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 15:55:37] INFO: 开始演示模式
+[2025-06-15 15:55:37] INFO: 开始物理模拟模式
+[2025-06-15 15:55:37] INFO: 开始物理模拟...
+[2025-06-15 15:55:37] INFO: 生成高质量视频: simulation_bouncy_4.0s.mp4
+[2025-06-15 15:55:59] INFO: 模拟统计: {'total_frames': 120, 'duration': 4.0, 'fps': 30, 'energy_initial': np.float64(138.9640626918684), 'energy_final': np.float64(107.56310372594088), 'energy_loss': np.float64(31.40095896592753), 'energy_loss_percent': np.float64(22.59646009022805)}
+[2025-06-15 15:56:15] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 15:56:15] INFO: 开始演示模式
+[2025-06-15 15:56:15] INFO: 开始物理模拟模式
+[2025-06-15 15:56:15] INFO: 开始物理模拟...
+[2025-06-15 15:56:15] INFO: 生成高质量视频: simulation_bouncy_4.0s.mp4
+[2025-06-15 15:56:37] INFO: 模拟统计: {'total_frames': 120, 'duration': 4.0, 'fps': 30, 'energy_initial': np.float64(138.9640626918684), 'energy_final': np.float64(107.20797027633076), 'energy_loss': np.float64(31.75609241553765), 'energy_loss_percent': np.float64(22.85201785295522)}
+[2025-06-15 16:02:35] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 16:02:35] INFO: 开始演示模式
+[2025-06-15 16:02:35] INFO: 开始物理模拟模式
+[2025-06-15 16:02:35] INFO: 开始物理模拟...
+[2025-06-15 16:02:35] INFO: 生成高质量视频: simulation_bouncy_3.0s.mp4
+[2025-06-15 16:02:52] INFO: 模拟统计: {'total_frames': 90, 'duration': 3.0, 'fps': 30, 'energy_initial': np.float64(138.9640626918684), 'energy_final': np.float64(108.96990669687445), 'energy_loss': np.float64(29.99415599499396), 'energy_loss_percent': np.float64(21.584109887101835)}
+[2025-06-15 16:03:07] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 16:03:07] INFO: 开始演示模式
+[2025-06-15 16:03:07] INFO: 开始物理模拟模式
+[2025-06-15 16:03:09] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 16:03:09] INFO: 开始物理模拟...
+[2025-06-15 16:03:10] INFO: 生成高质量视频: simulation_bouncy_4.0s.mp4
+[2025-06-15 16:03:49] INFO: 模拟统计: {'total_frames': 120, 'duration': 4.0, 'fps': 30, 'energy_initial': np.float64(138.9640626918684), 'energy_final': np.float64(106.27755537027947), 'energy_loss': np.float64(32.686507321588934), 'energy_loss_percent': np.float64(23.52155419784054)}
+[2025-06-15 16:08:43] INFO: 开始运行，模式: demo, 场景: bouncy
+[2025-06-15 16:08:43] INFO: 开始演示模式
+[2025-06-15 16:08:43] INFO: 开始物理模拟模式
+[2025-06-15 16:08:45] INFO: AI预测器已加载: output/models/compatible_physics_predictor.pth
+[2025-06-15 16:08:45] INFO: 开始物理模拟...
+[2025-06-15 16:08:48] INFO: 生成高质量视频: simulation_bouncy_14.0s.mp4
+[2025-06-15 16:11:15] INFO: 模拟统计: {'total_frames': 420, 'duration': 14.0, 'fps': 30, 'energy_initial': np.float64(138.9640626918684), 'energy_final': np.float64(74.53580314818062), 'energy_loss': np.float64(64.42825954368779), 'energy_loss_percent': np.float64(46.36325269688438)}

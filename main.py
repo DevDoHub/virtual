@@ -35,11 +35,11 @@ def create_demo_scenario(scenario='basic'):
             'duration': 15.0
         },
         'bouncy': {
-            'position': [0, 0, 10],  # Z轴为高度
-            'velocity': [0, 0, 0],   # 初始静止
+            'position': [-1, -2, 14],  # 从更高位置开始，偏离中心
+            'velocity': [1.5, 1.0, 0],   # 给一些水平初始速度
             'gravity': 9.81,
             'duration': 12.0,
-            'restitution': 0.9
+            'restitution': 0.85  # 稍微降低弹性，更真实
         }
     }
     
@@ -126,9 +126,18 @@ def run_simulation(args, logger):
     if 'restitution' in scenario_config:
         cube.restitution = scenario_config['restitution']
     
+    # 添加障碍物到场景
+    if args.scenario == 'bouncy':
+        engine.add_obstacles('bouncy_obstacles')
+    else:
+        engine.add_obstacles('basic')
+    
     # 创建3D场景
     scene = Scene3D(bounds=bounds)
     video_gen = VideoGenerator(scene, fps=30, output_dir=os.path.join(args.output_dir, 'videos'))
+    
+    # 将物理引擎传递给视频生成器以便渲染障碍物
+    video_gen.physics_engine = engine
     
     # AI预测器（可选）
     predictor = None
@@ -174,7 +183,8 @@ def run_simulation(args, logger):
         video_gen.render_high_quality_animation(
             filename=video_filename,
             show_prediction=predictor is not None,
-            figsize=(12, 9)
+            figsize=(12, 9),
+            engine=engine
         )
     
     # 显示统计信息

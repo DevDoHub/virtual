@@ -18,6 +18,9 @@ def test_ai_prediction_visualization():
     cube.restitution = 0.9  # bouncy场景
     engine = PhysicsEngine(gravity=9.81)
     
+    # 添加障碍物
+    engine.add_obstacles('bouncy_obstacles')
+    
     # 创建AI预测器
     predictor = AIPredictor()
     
@@ -61,7 +64,8 @@ def test_ai_prediction_visualization():
     output_path = video_gen.render_high_quality_animation(
         filename="ai_prediction_test.mp4",
         show_prediction=True,
-        figsize=(12, 9)
+        figsize=(12, 9),
+        engine=engine
     )
     
     if output_path:
